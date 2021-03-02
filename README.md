@@ -10,33 +10,39 @@
 
 
 
-# 原项目的说明
-# 依赖：
-> 本项目在Ubuntu 18.10基于tesseract 4.0 rc3，OpenCV2; 使用Python3.6进行开发<br>
-> apt依赖安装：<br>
->`sudo apt install python3 python3-pip tesseract-ocr tesseract-ocr-chi-sim tzdata libsm6 libxext6 python3-tk -y` <br><br>
+# 开发环境
+Win10 + python3.8
+
+## install
 > Python依赖安装：<br>
 >`sudo pip3 install -r idcardocr/requirements.txt`<br><br>
-> ~~tessdata配置：~~<br>
-> ~~`sudo cp tessdata/* /usr/share/tesseract-ocr/tessdata`~~<br>
-# 使用方法：
-> 识别本地图片<br>
-> `import idcard_recognize;print idcard_recognize.process('testimages/3.jpg')`<br><br>
+## 使用方法：
+> 本地测试 test.py<br>
+> `python3 test.py`<br><br>
 > http_server远程接收图片<br>
 > `python3 idcard_recognize.py`  <br>
 > 默认监听端口为8080 <br><br>
-> Docker运行http_server:  <br>
-> `docker pull raymondwong/idcardocr;docker run -d -p 8080:8080 raymondwong/idcardocr`  <br>
->> 测试:  <br>
->>> 使用curl向服务器发送图片:  <br>
->>>`curl --request POST \
-  --url http://127.0.0.1:8080 \
-  --header 'content-type: multipart/form-data; boundary=----WebKitFormBoundary7MA4YWxkTrZu0gW' \
-  --form 'pic=@./testimages/3.jpg'`  <br><br>
->>> 使用Postman：  <br>
->>> ![avatar](postman.jpg) <br>
+> > 测试:  <br>
+> > > 使用curl向服务器发送图片:  <br>
+> > > `curl --request POST \
+> > > --url http://127.0.0.1:8080 \
+> > > --header 'content-type: multipart/form-data; boundary=----WebKitFormBoundary7MA4YWxkTrZu0gW' \
+> > > --form 'pic=@./testimages/3.jpg'`  <br><br>
+> > > 使用Postman：  <br>
+> > > ![avatar](postman.jpg) <br>
+> > >
+> > > 参数mode：
+> > >
+> > > * 0：只识别身份证号码
+> > > * 1：识别身份证上的全部信息
+> > > * 2：获取全部信息的同时，还增加头像提取
+> >
+> > 
+> >
+> > 
 
-# 性能<br>
+
+## 性能<br>
 > 平台： I5 8259u + 16g macOS 13.14 关闭OpenCL<br>
 处理单张图片时间在2.5秒左右（单张图片只能使用单核心）  <br>
 ~~处理4张图片时间也是4秒左右（4核心）~~  <br>
